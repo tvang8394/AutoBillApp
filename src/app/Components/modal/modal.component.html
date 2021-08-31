@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">{{ title }}: {{first_name}}</h5>
+</div>
+<div class="modal-body">
+  <ul class="list-group list-group-flush">
+
+    <li class="list-group-item" style="display: flex; justify-content: space-between;">Start Date:
+      <input id="start_date" value="{{start_date}}" #start />
+
+
+    </li>
+
+    <li class="list-group-item" style="display: flex; justify-content: space-between;">End Date:
+      <input id="end_date" value="{{end_date}}" #end />
+    </li>
+
+    <li class="list-group-item" style="display: flex; justify-content: space-between;">Total Billed:
+      <input id="amount" value="{{amount}}" #amounts />
+    </li>
+
+    <li class="list-group-item" style="display: flex; justify-content: space-between;">Total Units:
+      <input id="units" value="{{units}}" #unit />
+    </li>
+
+    <li class="list-group-item" style="display: flex; justify-content: space-between;">Cash Recived:
+      <input id="cash_rec" value="{{cash_rec}}" #cash />
+
+    </li>
+  </ul>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="modalRef.close()">
+    Close
+  </button>
+
+  <button type="button" class="btn btn-primary"
+    (click)="editBtn(cash.value, start.value, end.value, amounts.value, unit.value)">Save changes</button>
+  <button type="button" class="btn btn-danger" (click)="deleteBtn()">
+    Delete
+  </button>
+</div>
