@@ -67,7 +67,12 @@ export class ResidentDetailComponent implements OnInit {
     for (let i = 0; i < this.billingList.length; i++) {
       if (this.billingList[i].id == billing_id) {
         this.billingList[i].approved = 'Paid';
-        this.billingService.updateBilling(this.billingList[i]).subscribe((item) => console.log(item));
+        this.billingService.updateBilling(this.billingList[i]).subscribe((item) => {
+          // Add a approve message here
+
+          localStorage.removeItem('billing');
+
+        });
       }
     }
   }
@@ -76,7 +81,10 @@ export class ResidentDetailComponent implements OnInit {
     for (let i = 0; i < this.billingList.length; i++) {
       if (this.billingList[i].id == billing_id) {
         this.billingList[i].approved = 'Denied';
-        this.billingService.updateBilling(this.billingList[i]).subscribe((item) => console.log(item));
+        this.billingService.updateBilling(this.billingList[i]).subscribe((item) => {
+          localStorage.removeItem('billing');
+
+        });
       }
     }
   }
@@ -116,23 +124,24 @@ export class ResidentDetailComponent implements OnInit {
     }
 
     this.billingService.addBilling(bill).subscribe(item => {
-      console.log(item);
       this.billingList.push(item);
     }
     );
+    localStorage.removeItem('billing');
+
   }
 
   addBill(b: Billing) {
     this.billingService.addBilling(b).subscribe(
       success => {
-        console.log(success);
+        // Add a success message here
+        
       }
     );
   }
   getAllBilling(): void {
     this.billingService.getAllBilling().subscribe(items => {
       this.billingList = items
-      console.log(this.billingList);
     });
   }
   getResidentBilling(): void {

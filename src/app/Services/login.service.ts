@@ -16,13 +16,11 @@ export class LoginService {
   private userUrl = 'http://localhost:8081/users'
 
   private httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': this.cookieService.get('auth') })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   // POST
   getLogin(login: User): Observable<string> {
-    console.log(login);
-    console.log(this.cookieService.getAll());
     return this.http.post<string>(this.userUrl + '/log_in', login);
   }
 }

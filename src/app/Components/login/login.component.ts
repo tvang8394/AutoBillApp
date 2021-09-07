@@ -38,8 +38,10 @@ export class LoginComponent implements OnInit {
   
   loggedInCookieCheck() {
       let cookieValue = this.cookieService.get('auth');
-      if (cookieValue != null) {
+      // console.log(cookieValue)
+      if (cookieValue == null) {
         window.location.href = '/main';
+        // console.log(cookieValue)
       }
   }
 }

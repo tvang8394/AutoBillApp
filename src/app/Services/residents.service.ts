@@ -23,7 +23,7 @@ export class ResidentService {
     const residents = this.http.get<Resident[]>(this.residentUrl + "all", this.httpOptions).pipe(
       catchError(this.handleError<Resident[]>('getResidents', []))
     );
-
+    
     return residents;
   }
 

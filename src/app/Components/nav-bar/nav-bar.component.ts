@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { CookieService } from 'ngx-cookie-service';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -8,16 +9,27 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private cookieService: CookieService, private location: Location) { }
   url: string;
+  loggedIn: boolean;
+
   ngOnInit(): void {
+    
     let allUrl = window.location.href;
-    console.log(allUrl.split('/'));
-    console.log(this.url);
+
     let endpoint = allUrl.split('/')[3];
     this.url = endpoint;
 
-    
+    this.loggedIn = this.cookieService.get('auth') == 'null' ? false : true;
+
+
   }
 
+
+  logout() {
+
+    this.cookieService.set('auth', null);
+
+    window.location.href = '/login';
+  }
 }

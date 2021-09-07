@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="url != 'login'">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="loggedIn">
     <div class="container-fluid">
         <a class="navbar-brand" href="/main">Auto Bill</a>
         <button class="navbar-toggler" type="button" (click)="basicNav.toggle()" aria-expanded="false"
@@ -13,6 +13,11 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="resident-list">Residents</a>
                 </li>
+
+                <li class="nav-item">
+                    <button class="btn btn-warning" (click)="logout()">Logout</button>
+                </li>
+
             </ul>
         </div>
     </div>

@@ -8,7 +8,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                             Number of Residents</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">24</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{residentList.length}}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -26,7 +26,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                             Days Billed</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">126</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{daysBilled}}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -42,18 +42,10 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Past Billed
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Billed
                         </div>
                         <div class="row no-gutters align-items-center">
-                            <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">List</div>
-                            </div>
-                            <div class="col">
-                                <div class="progress progress-sm mr-2">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
-                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">${{amountBilled}}</div>
                         </div>
                     </div>
                     <div class="col-auto">
@@ -71,8 +63,8 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Not Yet Billed</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">List Names</div>
+                            Pending Confirmation</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{pendingBills.length}}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-comments fa-2x text-gray-300"></i>

@@ -15,14 +15,21 @@ export class ResidentListComponent implements OnInit {
   residentList: Resident[];
 
   ngOnInit(): void {
-    this.getAllResidents();
+    
+    if (localStorage.getItem('residents') == null) {
+      this.getAllResidents();
+
+    } else {
+      this.residentList = JSON.parse(localStorage.getItem('residents'));
+    }
+
   }
 
   getAllResidents(): void {
     this.residentService.getAllResidents().subscribe(
       residents => {
+        localStorage.setItem('residents', JSON.stringify(residents));
         this.residentList = residents
-        console.log(residents)
       }
     );
   }

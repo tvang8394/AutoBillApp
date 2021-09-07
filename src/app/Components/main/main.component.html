@@ -1,1 +1,46 @@
 <app-cards></app-cards>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-7">
+            <h3>Confirmation Needed</h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Units</th>
+
+                        <th scope="col">Cash Recieved</th>
+                        <th scope="col">Confirm Cash Recieved</th>
+                    </tr>
+                </thead>
+
+                <tbody *ngFor="let bill of billingList">
+                    <tr *ngIf="bill.approved == 'Pending'">
+                        <!-- Add billing info -->
+                        <td scope="row">{{bill.id}}</td>
+                        <td>{{bill.resident_id.first_name}}</td>
+                        <td>{{bill.start_date}}</td>
+                        <td>{{bill.end_date}}</td>
+                        <td>${{bill.amount_billed}}</td>
+                        <td>{{bill.units_billed}}</td>
+                        <td>{{bill.approved}}</td>
+                        <td>
+                            <button class="btn btn-success" (click)="approveBtn(bill.id)"
+                                style="margin-right: 10px;">Confirm</button>
+                            <button class="btn btn-danger" (click)="deniedBtn(bill.id)">Denied</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+        <div class="col-md-5"> Test</div>
+    </div>
+
+</div>
