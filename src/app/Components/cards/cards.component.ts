@@ -63,7 +63,8 @@ export class CardsComponent implements OnInit {
     let billingStorage = localStorage.getItem('billing');
     // console.log(billingStorage);
     if (billingStorage == null) {
-      this.billingService.getAllBilling().subscribe(bills => {
+      this.billingService.getAllBilling().subscribe(resp => {
+        let bills = resp.body;
         this.billingList = bills;
         localStorage.setItem('billing', JSON.stringify(bills));
         bills.map(bill => {
@@ -93,7 +94,8 @@ export class CardsComponent implements OnInit {
       let updateCondition = billingStorage !== billingListString;
 
       if (updateCondition) {
-        this.billingService.getAllBilling().subscribe(bills => {
+        this.billingService.getAllBilling().subscribe(resp => {
+          let bills = resp.body;
           this.billingList = bills;
           localStorage.setItem('billing', JSON.stringify(bills));
           bills.map(bill => {

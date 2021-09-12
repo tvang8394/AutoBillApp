@@ -32,6 +32,8 @@ import { BillingDetailComponent } from './Components/billing-detail/billing-deta
 import { ModalComponent } from './Components/modal/modal.component';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginComponent } from './Components/login/login.component';
+import { AddResidentComponent } from './Components/add-resident/add-resident.component';
+import { EditResidentModalComponent } from './Components/edit-resident-modal/edit-resident-modal.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { LoginComponent } from './Components/login/login.component';
     ResidentDetailComponent,
     BillingDetailComponent,
     ModalComponent,
-    LoginComponent
+    LoginComponent,
+    AddResidentComponent,
+    EditResidentModalComponent
   ],
   imports: [
     BrowserModule,

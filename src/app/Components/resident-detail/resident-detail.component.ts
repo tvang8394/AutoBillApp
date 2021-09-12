@@ -6,6 +6,8 @@ import { ResidentService } from '../../Services/residents.service';
 import { BillingService } from 'src/app/Services/billing.service';
 import { Billing } from 'src/app/Interface/billing';
 import { ModalComponent } from '../modal/modal.component';
+import { AddResidentComponent } from '../add-resident/add-resident.component';
+import { EditResidentModalComponent } from '../edit-resident-modal/edit-resident-modal.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
 @Component({
@@ -16,6 +18,10 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 export class ResidentDetailComponent implements OnInit {
 
   modalRef: MdbModalRef<ModalComponent>;
+
+  addResidentModal: MdbModalRef<AddResidentComponent>
+
+  editResidentModal: MdbModalRef<EditResidentModalComponent>
 
   constructor(
     private route: ActivatedRoute,
@@ -58,6 +64,17 @@ export class ResidentDetailComponent implements OnInit {
         amount: bill.amount_billed,
         cash_rec: bill.approved,
         units: bill.units_billed
+      }
+    });
+    // this.modalRef = this.modalService.open(ModalComponent)
+  }
+
+  openEditResidentModal() {
+    this.resident;
+
+    this.editResidentModal = this.modalService.open(EditResidentModalComponent, {
+      data: {
+        resident: this.resident,
       }
     });
     // this.modalRef = this.modalService.open(ModalComponent)
@@ -135,15 +152,36 @@ export class ResidentDetailComponent implements OnInit {
     this.billingService.addBilling(b).subscribe(
       success => {
         // Add a success message here
-        
+
       }
     );
   }
+
   getAllBilling(): void {
-    this.billingService.getAllBilling().subscribe(items => {
+    this.billingService.getAllBilling().subscribe(resp => {
+      let items = resp.body.sort((a, b) => {
+        if (a.id != undefined && b.id != undefined) {
+          return a.id - b.id;
+        }
+        return 0;
+      });
       this.billingList = items
     });
   }
-  getResidentBilling(): void {
+
+  deleteResident(): void {
+    let check = false;
+
+    if (confirm('Are you sure you want to delete this Billing?')) {
+      check = true;
+    }
+    if (check) {
+      console.log(this.resident)
+      this.residentService.deleteResident(this.resident.id).subscribe((deleted) => {
+        console.log(deleted);
+        this.goBack();
+      });
+    }
   }
+
 }

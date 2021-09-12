@@ -15,21 +15,16 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
     
-    let allUrl = window.location.href;
+    let auth = sessionStorage.getItem('auth');
 
-    let endpoint = allUrl.split('/')[3];
-    this.url = endpoint;
-
-    this.loggedIn = this.cookieService.get('auth') == 'null' ? false : true;
-
-
+    if (auth) {
+      this.loggedIn = true;
+    }
   }
 
 
   logout() {
-
-    this.cookieService.set('auth', null);
-
+    sessionStorage.removeItem('auth');
     window.location.href = '/login';
   }
 }

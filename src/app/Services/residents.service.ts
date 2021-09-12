@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resident } from '../Interface/resident';
 
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -16,15 +16,43 @@ export class ResidentService {
 
 
   private httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': this.cookieService.get('auth') })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': sessionStorage.getItem('auth') })
   };
 
   getAllResidents(): Observable<Resident[]> {
     const residents = this.http.get<Resident[]>(this.residentUrl + "all", this.httpOptions).pipe(
       catchError(this.handleError<Resident[]>('getResidents', []))
     );
-    
+
     return residents;
+  }
+
+  getAllRedientsEtag(): Observable<HttpResponse<Resident[]>> {
+    let residentEtag = this.cookieService.get('residentEtag')
+    if (residentEtag) {
+      
+      return this.http.get<Resident[]>(this.residentUrl + "all", {
+        observe: 'response', headers: new HttpHeaders({
+          'Content-Type': 'application/json', 'Authorization': sessionStorage.getItem('auth'), 'If-None-Match': residentEtag
+        })
+      }).pipe(catchError(err => {
+        
+        if (err.status === 304) {
+          return of(err.body);
+        }
+      }));
+    }
+    
+    return this.http.get<Resident[]>(this.residentUrl + "all", {
+      observe: 'response', headers: new HttpHeaders({
+        'Content-Type': 'application/json', 'Authorization': sessionStorage.getItem('auth')
+      })
+    }).pipe(catchError(err => {
+      
+      if (err.status === 304) {
+        return of(err.body);
+      }
+    }));
   }
 
   getResident(id: number): Observable<Resident> {
@@ -34,25 +62,25 @@ export class ResidentService {
     )
   }
 
-  updateResident(resident: Resident): Observable<any> {
-    const url = `${this.residentUrl}/${resident.id}`;
+  updateResident(resident: Resident): Observable<Resident> {
+    const url = `${this.residentUrl}update`;
 
-    return this.http.put(url, resident, this.httpOptions).pipe(
-      catchError(this.handleError<any>('updateResident'))
+    return this.http.put<Resident>(url, resident, this.httpOptions).pipe(
+      catchError(this.handleError<Resident>('updateResident'))
     )
   }
 
-  
+
 
   addResident(resident: Resident): Observable<Resident> {
-    return this.http.post<Resident>(this.residentUrl, resident, this.httpOptions).pipe(
+    return this.http.post<Resident>(this.residentUrl + 'add', resident, this.httpOptions).pipe(
       catchError(this.handleError<Resident>('addResident'))
     )
   }
 
   deleteResident(id: number): Observable<Resident> {
-    const url = `${this.residentUrl}/${id}`;
-    return this.http.delete<Resident>(url, this.httpOptions).pipe(
+    ;
+    return this.http.delete<Resident>(this.residentUrl + 'delete' + `/${id}`, this.httpOptions).pipe(
       catchError(this.handleError<Resident>('deleteResident'))
     )
   }
@@ -75,12 +103,8 @@ export class ResidentService {
 
   }
   runFormInputPost(startDate: string, endDate: string, residentId: number): Observable<any> {
-    let dateObj = {
-      startDate: startDate,
-      endDate: endDate
-    }
     let url = `http://localhost:3001/openBrowser?startDate=${startDate}&endDate=${endDate}&residentId=${residentId}`
-    return this.http.get(url, this.httpOptions).pipe(
+    return this.http.get(url).pipe(
       catchError(this.handleError('get'))
     )
   }

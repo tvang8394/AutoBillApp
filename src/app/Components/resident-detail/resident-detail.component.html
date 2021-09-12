@@ -3,8 +3,9 @@
 
         <!-- Jumbotron -->
         <div class="p-5 bg-light" style="margin-top: 58px;">
-            <h4 class="mb-3">Name: {{resident.first_name}} {{resident.last_name}}</h4>
-            <h6 class="mb-3">Up to date</h6>
+            <h4 class="mb-3">{{resident.first_name}} {{resident.last_name}}</h4>
+            <button class="btn btn-warning" (click)="openEditResidentModal()">Edit Resident</button>
+            <button class="btn btn-danger" style="margin-left: 1em;" (click)="deleteResident()">Delete Resident</button>
         </div>
         <!-- Jumbotron -->
     </header>

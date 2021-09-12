@@ -1,22 +1,26 @@
 <app-cards></app-cards>
+<div>
+  <button class="btn btn-primary" (click)="openModal()">Add New Resident</button>
+
+</div>
 
 <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Resident Name</th>
-        <th scope="col">Daily Rate</th>
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Resident Name</th>
+      <th scope="col">Daily Rate</th>
 
-        <th scope="col">DOB</th>
-      </tr>
-    </thead>
-    
-    <tbody>
-      <tr routerLink="/detail/{{resident.id}}" *ngFor="let resident of residentList">
-        <th scope="row">{{resident.id}}</th>
-        <td>{{resident.first_name}} {{resident.last_name}}</td>
-        <td>${{resident.amount}}</td>
-        <td>{{resident.date_of_birth}}</td>
-      </tr>
-    </tbody>
-  </table>
+      <th scope="col">DOB</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr routerLink="/detail/{{resident.id}}" *ngFor="let resident of residentList">
+      <th scope="row">{{resident.id}}</th>
+      <td>{{resident.first_name}} {{resident.last_name}}</td>
+      <td>${{resident.amount}}</td>
+      <td>{{resident.date_of_birth}}</td>
+    </tr>
+  </tbody>
+</table>

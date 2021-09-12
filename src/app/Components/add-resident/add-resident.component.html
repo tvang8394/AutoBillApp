@@ -1,0 +1,125 @@
+<form class="needs-validation" novalidate="" class="text-center">
+    <div class="container" style="padding: 1em;">
+        <div style="display: flex; justify-content: space-between;">
+            <h4 class="display-4">Add Resident</h4>
+            <i class="fas fa-window-close fa-2x" type="button" (click)="modalRef.close()"></i>
+
+        </div>
+
+        <div class="row ">
+
+            <div class="col-md-6 mb-3">
+
+                <label for="firstName">First name</label>
+                <input type="text" class="form-control" id="firstName" placeholder="" value="" required="" #firstName>
+
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+
+
+            <div class="col-md-6 mb-3">
+
+                <label for="lastName">Last name</label>
+                <input type="text" class="form-control" id="lastName" placeholder="" value="" required="" #lastName>
+
+                <div class="invalid-feedback">
+                    Valid last name is required.
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <label for="lastName">Date of Birth</label>
+                <input type="text" class="form-control" id="dob" placeholder="" value="" required="" #dob>
+
+                <div class="invalid-feedback">
+                    Valid last name is required.
+                </div>
+            </div>
+
+
+            <div class="col-md-6 mb-3">
+
+                <label for="lastName">Subscriber ID</label>
+                <input type="text" class="form-control" id="lastName" placeholder="" value="" required="" #subId>
+
+                <div class="invalid-feedback">
+                    Valid last name is required.
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <label for="lastName">Diagnosis Code</label>
+                <input type="text" class="form-control" id="lastName" placeholder="" value="" required=""
+                    #diagnosisCode />
+
+                <div class="invalid-feedback">
+                    Valid last name is required.
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <label for="lastName">UMPI</label>
+                <input type="text" class="form-control" id="lastName" placeholder="" value="" required="" #umpi />
+
+                <div class="invalid-feedback">
+                    Valid last name is required.
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <label for="lastName">Main Modifier</label>
+                <input type="text" class="form-control" id="lastName" placeholder="" value="" required=""
+                    #mainModifier />
+
+                <div class="invalid-feedback">
+                    Valid last name is required.
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <label for="lastName">Modifier</label>
+                <input type="text" class="form-control" id="lastName" placeholder="TG" value="" required="" #modifier />
+
+                <div class="invalid-feedback">
+                    Valid last name is required.
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <label for="lastName">Amount</label>
+                <input type="text" class="form-control" id="lastName" placeholder="" value="" required="" #amount />
+
+                <div class="invalid-feedback">
+                    Valid amount is required.
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <label for="lastName">Prior Auth</label>
+                <input type="text" class="form-control" id="priorAuth" placeholder="" value="" required="" #priorAuth />
+
+                <div class="invalid-feedback">
+                    Valid amount is required.
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="mb-4">
+
+
+        <button class='add-button btn btn-primary btn-lg btn-block'
+            (click)="add(firstName.value, lastName.value, dob.value, subId.value,diagnosisCode.value,umpi.value,mainModifier.value,modifier.value, amount.value, priorAuth.value);">Add
+            Resident</button>
+
+    </div>
+</form>

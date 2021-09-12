@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from '../../Interface/user';
 import { LoginService } from 'src/app/Services/login.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,10 +10,11 @@ import { LoginService } from 'src/app/Services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private cookieService: CookieService) { }
+  constructor(private loginService: LoginService, private cookieService: CookieService, private router: Router) { }
+
 
   ngOnInit(): void {
-    this.loggedInCookieCheck();
+
   }
 
   login(username: string, password: string): void {
@@ -26,22 +27,16 @@ export class LoginComponent implements OnInit {
     }
 
     this.loginService.getLogin(user).subscribe(token => {
-      this.cookieService.set('auth', token);
+      
+      sessionStorage.setItem('auth', token);
       if (token != null) {
         window.location.href = '/main';
       }
     });
 
-    
+
 
   }
-  
-  loggedInCookieCheck() {
-      let cookieValue = this.cookieService.get('auth');
-      // console.log(cookieValue)
-      if (cookieValue == null) {
-        window.location.href = '/main';
-        // console.log(cookieValue)
-      }
-  }
+
+ 
 }
