@@ -1,24 +1,26 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="loggedIn">
-    <div class="container-fluid" style="margin-bottom: 1em;">
-        <a class="navbar-brand" routerLink="main">Auto Bill</a>
-        <button class="navbar-toggler" type="button" (click)="basicNav.toggle()" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav" mdbCollapse #basicNav="mdbCollapse">
-            <ul class="navbar-nav">
+<div class="col">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="loggedIn">
+        <div class="container-fluid" style="margin-bottom: 1em;">
+            <a class="navbar-brand" routerLink="main">Auto Bill</a>
+            <button class="navbar-toggler" type="button" (click)="basicNav.toggle()" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav" mdbCollapse #basicNav="mdbCollapse">
+                <ul class="navbar-nav">
 
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" routerLink="main">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="resident-list">Residents</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" routerLink="main">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="resident-list">Residents</a>
+                    </li>
 
-            </ul>
-            <button class="btn btn-warning" style="margin-left:auto" (click)="logout()">Logout</button>
+                </ul>
+                <button class="btn btn-warning" style="margin-left:auto" (click)="logout()">Logout</button>
+            </div>
+
         </div>
 
-    </div>
-
-</nav>
+    </nav>
+</div>

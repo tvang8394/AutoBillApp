@@ -14,7 +14,7 @@ export class BillingService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
-  private url = 'http://localhost:8081/billing';
+  private url = 'http://localhost:8080/billing';
 
   private httpOptions = {
 

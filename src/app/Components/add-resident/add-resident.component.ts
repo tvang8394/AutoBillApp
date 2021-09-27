@@ -40,7 +40,7 @@ export class AddResidentComponent implements OnInit {
       cash_rec: new FormControl('', Validators.required),
       units: new FormControl('', Validators.required),
     });
-    this.getResident();
+    
   }
 
   getResident(): void {

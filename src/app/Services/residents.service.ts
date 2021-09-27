@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
+import { prepareEventListenerParameters } from '@angular/compiler/src/render3/view/template';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 export class ResidentService {
   constructor(private http: HttpClient, private cookieService: CookieService) { }
-  private residentUrl = 'http://localhost:8081/residents/'
+  private residentUrl = 'http://localhost:8080/residents/'
 
 
   private httpOptions = {
@@ -73,7 +74,9 @@ export class ResidentService {
 
 
   addResident(resident: Resident): Observable<Resident> {
-    return this.http.post<Resident>(this.residentUrl + 'add', resident, this.httpOptions).pipe(
+    let url = 'http://localhost:8080/residents/add';
+    console.log(url);
+    return this.http.post<Resident>('http://localhost:8080/residents/add', resident, this.httpOptions).pipe(
       catchError(this.handleError<Resident>('addResident'))
     )
   }
@@ -111,7 +114,7 @@ export class ResidentService {
 
 
   stsAddResident(resident: Resident): Observable<Resident> {
-    return this.http.post<Resident>('http://localhost:8081/residents/add', resident, this.httpOptions).pipe(
+    return this.http.post<Resident>('http://localhost:8080/residents/add', resident, this.httpOptions).pipe(
       catchError(this.handleError<Resident>('addResident'))
     )
   }
@@ -129,6 +132,7 @@ export class ResidentService {
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
+      console.log(result)
 
       // Let the app keep running by returning an empty result.
       return of(result as T);

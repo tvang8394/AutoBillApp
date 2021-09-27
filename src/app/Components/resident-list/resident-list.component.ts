@@ -25,7 +25,7 @@ export class ResidentListComponent implements OnInit {
   openModal(): void {
     this.addResidentModal = this.modalService.open(AddResidentComponent, {
       data: {
-
+        residentList: this.residentList
       }
     });
   }

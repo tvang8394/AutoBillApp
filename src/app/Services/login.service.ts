@@ -13,7 +13,7 @@ import { User } from '../Interface/user';
 export class LoginService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
-  private userUrl = 'http://localhost:8081/users'
+  private userUrl = 'http://localhost:8080/users'
 
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
