@@ -87,7 +87,7 @@ export class ModalComponent {
     this.billingService.updateBilling(bill).subscribe(
       success => {
         this.modalRef.close();
-        window.location.reload();
+        
       }
     );
 

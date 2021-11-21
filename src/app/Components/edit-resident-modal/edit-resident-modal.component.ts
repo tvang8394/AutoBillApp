@@ -34,7 +34,7 @@ export class EditResidentModalComponent implements OnInit {
     
     this.getResident();
   }
-
+  
   getResident(): void {
     let url = this.router.url;
     let id = url.substring(url.lastIndexOf('/') + 1);
@@ -86,10 +86,11 @@ export class EditResidentModalComponent implements OnInit {
     
     this.residentService.updateResident(this.resident).subscribe(
       (res) => {
-        window.location.reload();
       }
     );
-
+    let url = this.router.url;
+    let id = url.substring(url.lastIndexOf('/') + 1);
+    this.router.navigate([`/detail/${id}`])
     // first_name = '';
     // last_name = '';
     // dob = '';

@@ -40,7 +40,7 @@ export class AddResidentComponent implements OnInit {
       cash_rec: new FormControl('', Validators.required),
       units: new FormControl('', Validators.required),
     });
-    
+
   }
 
   getResident(): void {
@@ -89,7 +89,7 @@ export class AddResidentComponent implements OnInit {
     this.billingService.updateBilling(bill).subscribe(
       success => {
         this.modalRef.close();
-        window.location.reload();
+       
       }
     );
 
@@ -113,10 +113,10 @@ export class AddResidentComponent implements OnInit {
     }
     this.residentService.addResident(this.resident).subscribe(
       (res) => {
-        console.log(res);
       }
-
     );
+    
+    this.router.navigate([`/resident-list`])
 
     first_name = '';
     last_name = '';

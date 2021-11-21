@@ -14,7 +14,7 @@ export class BillingService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
-  private url = 'http://localhost:8080/billing';
+  private url = 'http://ec2-18-217-161-88.us-east-2.compute.amazonaws.com:8080/autobill-app-backend-0.0.1-SNAPSHOT/billing';
 
   private httpOptions = {
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Resident } from '../../Interface/resident';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ResidentService } from '../../Services/residents.service';
 import { BillingService } from 'src/app/Services/billing.service';
@@ -28,7 +28,8 @@ export class ResidentDetailComponent implements OnInit {
     private residentService: ResidentService,
     private location: Location,
     private billingService: BillingService,
-    private modalService: MdbModalService
+    private modalService: MdbModalService,
+    private router: Router
   ) {
 
 
@@ -113,7 +114,7 @@ export class ResidentDetailComponent implements OnInit {
 
 
   goBack(): void {
-    this.location.back();
+    this.router.navigate(['/residents']);
   }
 
   save(): void {
@@ -176,10 +177,8 @@ export class ResidentDetailComponent implements OnInit {
       check = true;
     }
     if (check) {
-      console.log(this.resident)
       this.residentService.deleteResident(this.resident.id).subscribe((deleted) => {
-        console.log(deleted);
-        this.goBack();
+        this.router.navigateByUrl('/resident-list');
       });
     }
   }

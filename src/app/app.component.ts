@@ -12,4 +12,5 @@ export class AppComponent {
     localStorage.clear();
     // this.cookieService.set('auth', null);
   }
+
 }

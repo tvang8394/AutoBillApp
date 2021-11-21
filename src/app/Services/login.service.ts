@@ -13,7 +13,7 @@ import { User } from '../Interface/user';
 export class LoginService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
-  private userUrl = 'http://localhost:8080/users'
+  private userUrl = 'http://ec2-18-217-161-88.us-east-2.compute.amazonaws.com:8080/autobill-app-backend-0.0.1-SNAPSHOT/users'
 
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

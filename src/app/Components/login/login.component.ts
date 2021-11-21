@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.checkLoggIn();
   }
 
   login(username: string, password: string): void {
@@ -27,16 +27,26 @@ export class LoginComponent implements OnInit {
     }
 
     this.loginService.getLogin(user).subscribe(token => {
-      
-      sessionStorage.setItem('auth', token);
       if (token != null) {
-        window.location.href = '/main';
+        sessionStorage.setItem('auth', token);
+        this.router.navigate(['/main']);
+      }
+    }, error => {
+      if (error.status == 403) {
+        alert('Invalid username or password');
       }
     });
-
-
-
   }
 
+  checkLoggIn(): boolean {
+    if (sessionStorage.getItem('auth') != null) {
+      this.router.navigate(['/main']);
+      return true;
+      
+    } else {
+
+      return false;
+    }
+  }
  
 }

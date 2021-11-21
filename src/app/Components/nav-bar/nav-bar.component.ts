@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Location } from '@angular/common';
 @Component({
@@ -9,22 +9,35 @@ import { Location } from '@angular/common';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private router: Router, private cookieService: CookieService, private location: Location) { }
+  constructor(private router: Router, private cookieService: CookieService, private location: Location) { 
+
+  }
   url: string;
-  loggedIn: boolean;
+  loggedIn: boolean = false;
+  authSession: string = sessionStorage.getItem('auth');
 
   ngOnInit(): void {
     
     let auth = sessionStorage.getItem('auth');
-
     if (auth) {
       this.loggedIn = true;
     }
+    
+    this.router.events.pipe().subscribe(event => {
+      if (event instanceof NavigationStart) {
+        if(event.url == '/main') {
+          this.loggedIn = true;
+        }
+      }
+    }
+    );
   }
+
 
 
   logout() {
     sessionStorage.removeItem('auth');
-    window.location.href = '/login';
+    this.loggedIn = false;
+    this.router.navigate(['/login']);
   }
 }

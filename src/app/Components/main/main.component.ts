@@ -33,7 +33,6 @@ export class MainComponent implements OnInit {
         let residentStorage = localStorage.getItem('residents');
         // console.log(residentStorage);
         if (residentStorage == null) {
-            console.log("1st in res")
 
             this.residentService.getAllResidents().subscribe(residents => {
                 this.residentList = residents;
@@ -43,7 +42,6 @@ export class MainComponent implements OnInit {
             }
             )
         } else {
-            console.log("else in res")
 
             this.residentList = JSON.parse(localStorage.getItem('residents'));
 
@@ -59,7 +57,6 @@ export class MainComponent implements OnInit {
             this.residentService.getAllResidents().subscribe(residents => {
                 this.residentList = residents;
                 localStorage.setItem('residents', JSON.stringify(residents));
-                console.log('updated resident')
             }
             )
         }
@@ -85,7 +82,6 @@ export class MainComponent implements OnInit {
             )
         }
         else {
-            console.log("else in billing")
 
             this.billingList = JSON.parse(localStorage.getItem('billing'));
 

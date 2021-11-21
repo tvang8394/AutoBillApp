@@ -5,11 +5,11 @@ import { ResidentListComponent } from './Components/resident-list/resident-list.
 import { ResidentDetailComponent } from './Components/resident-detail/resident-detail.component';
 import { BillingDetailComponent } from './Components/billing-detail/billing-detail.component';
 import { LoginComponent } from './Components/login/login.component';
-import  { AuthGuard } from './Guard/auth.guard';
+import { AuthGuard } from './Guard/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  {path: 'login', component: LoginComponent},
+  { path: 'login', component: LoginComponent },
   { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
   { path: 'resident-list', component: ResidentListComponent, canActivate: [AuthGuard] },
   { path: 'detail/:id', component: ResidentDetailComponent, canActivate: [AuthGuard] },

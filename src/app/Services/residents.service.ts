@@ -13,7 +13,7 @@ import { prepareEventListenerParameters } from '@angular/compiler/src/render3/vi
 
 export class ResidentService {
   constructor(private http: HttpClient, private cookieService: CookieService) { }
-  private residentUrl = 'http://localhost:8080/residents/'
+  private residentUrl = 'http://ec2-18-217-161-88.us-east-2.compute.amazonaws.com:8080/autobill-app-backend-0.0.1-SNAPSHOT/residents/'
 
 
   private httpOptions = {
@@ -74,9 +74,9 @@ export class ResidentService {
 
 
   addResident(resident: Resident): Observable<Resident> {
-    let url = 'http://localhost:8080/residents/add';
+    let url = 'http://ec2-18-217-161-88.us-east-2.compute.amazonaws.com:8080/autobill-app-backend-0.0.1-SNAPSHOT/residents/add';
     console.log(url);
-    return this.http.post<Resident>('http://localhost:8080/residents/add', resident, this.httpOptions).pipe(
+    return this.http.post<Resident>('http://ec2-18-217-161-88.us-east-2.compute.amazonaws.com:8080/autobill-app-backend-0.0.1-SNAPSHOT/residents/add', resident, this.httpOptions).pipe(
       catchError(this.handleError<Resident>('addResident'))
     )
   }
@@ -89,22 +89,8 @@ export class ResidentService {
   }
 
 
-  runFormInput(): Observable<any> {
-    let url = 'http://localhost:3001'
-    return this.http.get(url).pipe(
-      catchError(this.handleError('get'))
-    )
-  }
+  
 
-
-  callOpenBrowser(): Observable<any> {
-    let url = `http://localhost:3001/openBrowser`
-
-    return this.http.get(url, this.httpOptions).pipe(
-      catchError(this.handleError('get browser')
-      ))
-
-  }
   runFormInputPost(startDate: string, endDate: string, residentId: number): Observable<any> {
     let url = `http://localhost:3001/openBrowser?startDate=${startDate}&endDate=${endDate}&residentId=${residentId}`
     return this.http.get(url).pipe(
@@ -114,7 +100,7 @@ export class ResidentService {
 
 
   stsAddResident(resident: Resident): Observable<Resident> {
-    return this.http.post<Resident>('http://localhost:8080/residents/add', resident, this.httpOptions).pipe(
+    return this.http.post<Resident>('http://ec2-18-217-161-88.us-east-2.compute.amazonaws.com:8080/autobill-app-backend-0.0.1-SNAPSHOT/residents/add', resident, this.httpOptions).pipe(
       catchError(this.handleError<Resident>('addResident'))
     )
   }
