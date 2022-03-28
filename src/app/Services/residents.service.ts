@@ -15,7 +15,7 @@ export class ResidentService {
   constructor(private http: HttpClient, private cookieService: CookieService) { }
   private residentUrl = 'http://ec2-18-217-161-88.us-east-2.compute.amazonaws.com:8080/autobill-app-backend-0.0.1-SNAPSHOT/residents/'
 
-
+  
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': sessionStorage.getItem('auth') })
   };
@@ -31,25 +31,25 @@ export class ResidentService {
   getAllRedientsEtag(): Observable<HttpResponse<Resident[]>> {
     let residentEtag = this.cookieService.get('residentEtag')
     if (residentEtag) {
-      
+
       return this.http.get<Resident[]>(this.residentUrl + "all", {
         observe: 'response', headers: new HttpHeaders({
           'Content-Type': 'application/json', 'Authorization': sessionStorage.getItem('auth'), 'If-None-Match': residentEtag
         })
       }).pipe(catchError(err => {
-        
+
         if (err.status === 304) {
           return of(err.body);
         }
       }));
     }
-    
+
     return this.http.get<Resident[]>(this.residentUrl + "all", {
       observe: 'response', headers: new HttpHeaders({
         'Content-Type': 'application/json', 'Authorization': sessionStorage.getItem('auth')
       })
     }).pipe(catchError(err => {
-      
+
       if (err.status === 304) {
         return of(err.body);
       }
@@ -89,7 +89,7 @@ export class ResidentService {
   }
 
 
-  
+
 
   runFormInputPost(startDate: string, endDate: string, residentId: number): Observable<any> {
     let url = `http://localhost:3001/openBrowser?startDate=${startDate}&endDate=${endDate}&residentId=${residentId}`

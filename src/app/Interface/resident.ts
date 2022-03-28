@@ -10,4 +10,5 @@ export interface Resident {
     sub_modifier: string;
     amount: string;
     prior_auth: string;
+    sa_expired_date: string;
 }

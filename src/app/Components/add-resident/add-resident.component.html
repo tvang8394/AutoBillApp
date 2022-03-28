@@ -112,13 +112,23 @@
                 </div>
             </div>
 
+            <div class="col-md-6 mb-3">
+
+              <label for="lastName">SA Expiration</label>
+              <input type="text" class="form-control" id="sa_expired_date" placeholder="" value="" required="" #sa_expired_date />
+
+              <div class="invalid-feedback">
+                  Valid amount is required.
+              </div>
+          </div>
+
         </div>
 
         <hr class="mb-4">
 
 
         <button class='add-button btn btn-primary btn-lg btn-block'
-            (click)="add(firstName.value, lastName.value, dob.value, subId.value,diagnosisCode.value,umpi.value,mainModifier.value,modifier.value, amount.value, priorAuth.value);">Add
+            (click)="add(firstName.value, lastName.value, dob.value, subId.value,diagnosisCode.value,umpi.value,mainModifier.value,modifier.value, amount.value, priorAuth.value, sa_expired_date.value);">Add
             Resident</button>
 
     </div>

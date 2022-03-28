@@ -24,6 +24,7 @@ export class AddResidentComponent implements OnInit {
   amount: string;
   cash_rec: string;
   units: string;
+  sa_expired_date: string;
 
   constructor(public modalRef: MdbModalRef<AddResidentComponent>, private residentService: ResidentService, private router: Router, private billingService: BillingService) {
 
@@ -39,6 +40,7 @@ export class AddResidentComponent implements OnInit {
       amount: new FormControl('', Validators.required),
       cash_rec: new FormControl('', Validators.required),
       units: new FormControl('', Validators.required),
+      sa_expired_date: new FormControl('', Validators.required),
     });
 
   }
@@ -89,13 +91,13 @@ export class AddResidentComponent implements OnInit {
     this.billingService.updateBilling(bill).subscribe(
       success => {
         this.modalRef.close();
-       
+
       }
     );
 
   }
 
-  add(first_name: string, last_name: string, dob: string, subId: string, diagnosisCode: string, umpi: string, mainModifier: string, modifier: string, amount: string, priorAuth: string): void {
+  add(first_name: string, last_name: string, dob: string, subId: string, diagnosisCode: string, umpi: string, mainModifier: string, modifier: string, amount: string, priorAuth: string, sa_expired_date: string): void {
     first_name = first_name.trim();
     if (!first_name) { return; }
     this.resident = {
@@ -109,13 +111,15 @@ export class AddResidentComponent implements OnInit {
       main_modifier: mainModifier,
       sub_modifier: modifier,
       amount: amount,
-      prior_auth: priorAuth
+      prior_auth: priorAuth,
+      sa_expired_date: sa_expired_date
     }
     this.residentService.addResident(this.resident).subscribe(
       (res) => {
+        console.log(this.resident)
       }
     );
-    
+
     this.router.navigate([`/resident-list`])
 
     first_name = '';
@@ -128,6 +132,7 @@ export class AddResidentComponent implements OnInit {
     modifier = '';
     amount = '';
     priorAuth = '';
+    sa_expired_date = '';
 
 
     // this.residentService.addResident({ first_name, last_name, dob, subId, diagnosisCode, umpi, mainModifier, modifier, amount, priorAuth } as Resident).subscribe(resident => {
